@@ -1,0 +1,46 @@
+[project]
+title = Fixed Camera
+version = 0.1
+
+[bootstrap]
+main_collection = /main/main.collectionc
+render = /fixed_camera/fixed_camera.renderc
+
+[input]
+game_binding = /input/game.input_bindingc
+use_accelerometer = 0
+
+[display]
+width = 512
+height = 336
+
+[script]
+shared_state = 1
+
+[windows]
+app_icon = /assets/app_icons/appicon.ico
+
+[osx]
+app_icon = /assets/app_icons/appicon.icns
+
+[android]
+input_method = HiddenInputField
+
+[physics]
+gravity_y = -1000.0
+scale = 0.01
+debug = 1
+
+[sprite]
+subpixels = 0
+
+[graphics]
+default_texture_min_filter = linear
+default_texture_mag_filter = linear
+
+[label]
+subpixels = 0
+
+[library]
+include_dirs = fixed_camera
+

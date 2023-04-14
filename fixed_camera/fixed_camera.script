@@ -1,0 +1,15 @@
+go.property("logical_width", 1024)
+go.property("logical_height", 672)
+go.property("min_aspect_ratio", vmath.vector3(4, 3, 0))
+go.property("max_aspect_ratio", vmath.vector3(16, 9, 0))
+
+local fixed_camera = require("fixed_camera.fixed_camera")
+
+function init(self)
+	local logical_width = go.get("#", "logical_width")
+	local logical_height = go.get("#", "logical_height")
+	local min_ar = go.get("#", "min_aspect_ratio")
+	local max_ar = go.get("#", "max_aspect_ratio")
+	
+	fixed_camera.setup(logical_width, logical_height, min_ar.x / min_ar.y, max_ar.x / max_ar.y)
+end

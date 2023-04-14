@@ -1,0 +1,20 @@
+go.property("scene", msg.url("#fixed_area"))
+
+function init(self)
+	msg.post(go.get("#", "scene"), "load")
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "init")
+		msg.post(sender, "enable")
+		
+	elseif message_id == hash("proxy_unloaded") then
+		msg.post(go.get("#", "scene"), "load")
+		
+	elseif message_id == hash("load_scene") then
+		local scene = go.get("#", "scene")
+		go.set("#", "scene", msg.url(message.scene))
+		msg.post(scene, "unload")
+	end
+end

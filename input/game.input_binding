@@ -1,0 +1,16 @@
+key_trigger {
+  input: KEY_1
+  action: "fixed-area"
+}
+key_trigger {
+  input: KEY_2
+  action: "fixed-height"
+}
+key_trigger {
+  input: KEY_3
+  action: "fixed-width"
+}
+mouse_trigger {
+  input: MOUSE_BUTTON_1
+  action: "click"
+}

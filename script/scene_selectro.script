@@ -1,0 +1,18 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+end
+
+function on_input(self, action_id, action)
+	
+	if not action.pressed then return end
+	
+	if action_id == hash("fixed-area") then
+		msg.post("scene#scene_loader", "load_scene", { scene = "#fixed_area"})
+		
+	elseif action_id == hash("fixed-height") then
+		msg.post("scene#scene_loader", "load_scene", { scene = "#fixed_height"})
+		
+	elseif action_id == hash("fixed-width") then
+		msg.post("scene#scene_loader", "load_scene", { scene = "#fixed_width"})
+	end
+end

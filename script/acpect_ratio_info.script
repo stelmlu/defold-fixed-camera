@@ -1,0 +1,33 @@
+local fixed_center = require("fixed_camera.fixed_camera")
+
+local function gcd(a, b)
+	if b == 0 then
+		return a
+	end
+	return gcd(b, a%b)
+end
+
+local function reduce_frac(x, y)
+	local d = gcd(math.floor(x + 0.5), math.floor(y + 0.5))
+	return math.floor(x/d + 0.5), math.floor(y/d + 0.5)
+end
+
+local function set_label(left, top, right, bottom)	
+	local a, b = reduce_frac(right-left, top-bottom)
+	label.set_text("#label", "Fixed area acpect ratio: "..tostring(a)..":"..tostring(b))
+end
+
+function init(self)
+	self.url = msg.url()
+	fixed_center.add_window_listener(self.url)
+end
+
+function final(self)
+	fixed_center.remove_window_listener(self.url)
+end
+
+function on_message(self, message_id, message)
+	if message_id == hash("window_update") then
+		set_label(fixed_center.get_viewport_rect())
+	end
+end
