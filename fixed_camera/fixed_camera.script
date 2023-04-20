@@ -2,6 +2,7 @@ go.property("logical_width", 1024)
 go.property("logical_height", 672)
 go.property("min_aspect_ratio", vmath.vector3(4, 3, 0))
 go.property("max_aspect_ratio", vmath.vector3(16, 9, 0))
+go.property("side_bars_color", vmath.vector4(0, 0, 0, 1))
 
 local fixed_camera = require("fixed_camera.fixed_camera")
 
@@ -11,5 +12,15 @@ function init(self)
 	local min_ar = go.get("#", "min_aspect_ratio")
 	local max_ar = go.get("#", "max_aspect_ratio")
 	
-	fixed_camera.setup(logical_width, logical_height, min_ar.x / min_ar.y, max_ar.x / max_ar.y)
+	fixed_camera.__logical_width = logical_width
+	fixed_camera.__logical_height = logical_height
+	fixed_camera.__min_aspect_ratio = min_ar.x / min_ar.y
+	fixed_camera.__max_aspect_ratio =  max_ar.x / max_ar.y
+	
+	assert(fixed_camera.__min_aspect_ratio < fixed_camera.__max_aspect_ratio,
+	"min_aspect_ratio ("..tostring(fixed_camera.__min_aspect_ratio)..") must be less then max_aspect_ratio ("..tostring(fixed_camera.__max_aspect_ratio)..")")
+
+	fixed_camera.__side_bars_color = go.get("#", "side_bars_color")
+
+	msg.post("@render:", "recalc_matrix")
 end
