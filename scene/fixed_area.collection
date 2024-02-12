@@ -25,11 +25,6 @@ instances {
       value: "336.0"
       type: PROPERTY_TYPE_NUMBER
     }
-    properties {
-      id: "side_bars_color"
-      value: "1.0, 1.0, 0.0, 1.0"
-      type: PROPERTY_TYPE_VECTOR4
-    }
   }
   scale3 {
     x: 1.0
@@ -40,24 +35,7 @@ instances {
 scale_along_z: 0
 embedded_instances {
   id: "background"
-  data: "components {\n"
-  "  id: \"side_bars\"\n"
-  "  component: \"/fixed_camera/side_bars.gui\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "  property_decls {\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
+  data: "embedded_components {\n"
   "  id: \"sprite\"\n"
   "  type: \"sprite\"\n"
   "  data: \"tile_set: \\\"/images/fixed_area_background.atlas\\\"\\n"

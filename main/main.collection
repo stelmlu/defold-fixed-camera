@@ -211,7 +211,7 @@ embedded_instances {
   "\\\"\\n"
   "  \\\"2: Fixed Height\\\\n"
   "\\\"\\n"
-  "  \\\"3: Fixde Width\\\"\\n"
+  "  \\\"3: Fixed Width\\\"\\n"
   "font: \\\"/builtins/fonts/system_font.font\\\"\\n"
   "material: \\\"/builtins/fonts/label.material\\\"\\n"
   "\"\n"

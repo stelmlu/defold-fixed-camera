@@ -25,11 +25,6 @@ instances {
       value: "288.0"
       type: PROPERTY_TYPE_NUMBER
     }
-    properties {
-      id: "side_bars_color"
-      value: "0.0, 0.5, 0.5, 1.0"
-      type: PROPERTY_TYPE_VECTOR4
-    }
   }
   scale3 {
     x: 1.0

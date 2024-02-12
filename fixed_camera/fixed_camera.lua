@@ -7,7 +7,6 @@ local M = {
 	__window_listener_list = {},
 	__logical_width = 1024, __logical_height = 672,
 	__min_aspect_ratio = 4/3, __max_aspect_ratio = 16/9,
-	__side_bars_color = vmath.vector4(0, 0, 0, 1)
 }
 
 function M.get_viewport_rect()

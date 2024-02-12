@@ -125,21 +125,17 @@ function on_message(self, message_id, message, sender)
     elseif message_id == WINDOW_RESIZED then
         local left, top, right, bottom = calc_screen_rect(message.width, message.height)
         self.projection = vmath.matrix4_orthographic(left, right, bottom, top, -1, 1)
+        fixed_camera.__screen_size = { width = message.width, height = message.height }
         fixed_camera.__screen_rect = { left, top, right, bottom }
         fixed_camera.__window_size = { render.get_window_width(), render.get_window_height() }
         fixed_camera.__calc_matrix(self.projection, self.view, render.get_width(), render.get_height())
         
-        local bar_width = 0
-        local bar_height = 0
-        
         if left < 0 then
-            bar_width = -left
             left = 0
             right = fixed_camera.__logical_width
         end
 
         if bottom < 0 then
-            bar_height = -bottom
             bottom = 0
             top = fixed_camera.__logical_height
         end
@@ -151,57 +147,51 @@ function on_message(self, message_id, message, sender)
             msg.post(url, WINDOW_UPDATE, {
                 window = {
                     width = render.get_window_width(),
-                    hieght = render.get_window_height()
+                    height = render.get_window_height()
                 },
                 viewport = {
                     left = l,
                     top = t,
                     right = r,
                     bottom = b
-                },
-                bar = {
-                    width = bar_width,
-                    height = bar_height
                 }
             })
         end
 
     elseif message_id == RECALC_MATRIX then
-        local left, top, right, bottom = calc_screen_rect(render.get_width(), render.get_height())
+        local size = fixed_camera.__screen_size
+        if size == nil then
+            size = { width = render.get_width(), height = render.get_height() }
+        end
+        
+        local left, top, right, bottom = calc_screen_rect(size.width, size.height)
         fixed_camera.__screen_rect = { left, top, right, bottom }
         fixed_camera.__window_size = { render.get_window_width(), render.get_window_height() }
-        local bar_width = 0
-        local bar_height = 0
+        self.projection = vmath.matrix4_orthographic(left, right, bottom, top, -1, 1)
+        fixed_camera.__calc_matrix(self.projection, self.view, render.get_width(), render.get_height())
+        
         if left < 0 then
-            bar_width = -left
             left = 0
             right = fixed_camera.__logical_width
         end
         if bottom < 0 then
-            bar_height = -bottom
             bottom = 0
             top = fixed_camera.__logical_height
         end
+        
         fixed_camera.__viewport_rect = { left, top, right, bottom }
-        self.projection = vmath.matrix4_orthographic(left, right, bottom, top, -1, 1)
-        fixed_camera.__calc_matrix(self.projection, self.view, render.get_width(), render.get_height())
-
         local l,t,r,b = fixed_camera.get_viewport_rect()
         for _,url in pairs(fixed_camera.__window_listener_list) do
             msg.post(url, WINDOW_UPDATE, {
                 window = {
                     width = render.get_window_width(),
-                    hieght = render.get_window_height()
+                    height = render.get_window_height()
                 },
                 viewport = {
                     left = l,
                     top = t,
                     right = r,
                     bottom = b
-                },
-                bar = {
-                    width = bar_width,
-                    height = bar_height
                 }
             })
         end
