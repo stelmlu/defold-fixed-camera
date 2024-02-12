@@ -1,25 +1,27 @@
-# Defold Fixed Center Render
+# Defold Fixed Center Render v0.2
 
 
 ## Description
 
-This is a render for the Defold game engine including support functions. It supports different screen aspect ratios where the default is 32:21. If it’s wider up to 16:9 (HD) or narrower down to 4:3 (iPad) the edges will be clipped. If the aspect ratio is bigger or smaller a black bar is shown at the sides. You can use a gui rect to hide the sprite behind the bar as shown in the example.
+This is a render for the Defold game engine including support functions. It supports different screen aspect ratios where the default is 32:21. If it’s wider up to 16:9 (HD) or narrower down to 4:3 (iPad) the edges will be clipped. If the aspect ratio is bigger or smaller a black bar is shown at the sides.
 
-## Constans
+## Install
 
-The default logical size for the 32:21 acpect ratio is 1024x671. You can change it by edit the following in _fixed_center.render_script_:
+In _game.project_ under Dependencies copy and page this path:
 
-```lua
-local LOGICAL_WIDTH = 1024
-local LOGICAL_HEIGHT = 672
+```text
+https://github.com/stelmlu/defold-fixed-camera/archive/refs/tags/v0.2.zip
 ```
 
-You can also update the the min and max acepect ratio before the side bars is shown by changing:
+and then from Defold editor select the meny Project -> Fetch Libraries.
 
-```lua
-local MAX_ACPECT_RATIO = 3/4
-local MIN_ACPECT_RATIO = 9/16
-```
+In your collection proxy (main.collection) add game object file (.go) fixed_camera/fixed_camera.go.
+
+The default logical size for the 32:21 acpect ratio is 1024x672. You can change it by edit the following properties at the fixed_camera.go -> fixed_camera.script.
+
+change the default values of the logical size and aspect ratio.
+
+If yout want Portrait, like the size 672x1024 then Min Aspect Ratio become: 9, 16, 0 and Max Aspect Ratio becomes 3, 4, 0.
 
 ## Functions
 
@@ -68,9 +70,6 @@ _Fields_
     *   top: y coordinate for the top edge in world space
     *   right: x coordinate for the right edge in world space
     *   bottom: y coordinate for the bottom edge in world space
-*   bar (table)
-    *   width: width of the bar at the horizontal sides
-    *   height: height of the bar at the vertical sides
 
 ### fixed_center.add_window_listener(url)
 
@@ -82,7 +81,6 @@ function init(self)
     fixed_center.add_window_listener(self.url)
 end
 ```
-
 
 ### fixed_center.remove_window_listener(url)
 
